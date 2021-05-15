@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Contact extends CI_Controller {
 	public function index()
 	{
-        $data = array(
+		$data = array(
             "menu" => array(
                 array(
                     "title" => "หน้าหลัก", "icon"=>"house-door",
@@ -33,6 +33,6 @@ class Home extends CI_Controller {
                 )
             )
         );
-		$this->load->view('ui/home', $data);
+		$this->load->view('ui/contact', $data);
 	}
 }

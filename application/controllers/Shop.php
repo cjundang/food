@@ -19,13 +19,12 @@ class Shop extends CI_Controller {
                     "link"=>"shop"
                 ),
                 array(
-                    "title" => "อาหาร", "icon"=>"shop",
-                    "link"=>"food"
-
-                ),
-                array(
                     "title" => "แผนที่", "icon"=>"map",
                     "link"=>"map"
+                ),
+                array(
+                    "title" => "เครื่องครัว", "icon"=>"shop",
+                    "link"=>"tools"
 
                 ),
                 array(
