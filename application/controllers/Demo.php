@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once('Data.php');
 class Demo extends CI_Controller {
-    public static $data = "ssssss"; 
-    public function test(){
-        echo "toi";
-    }
-    public function index(){
-        echo  Demo::$data;
-    }
+	public function index()
+	{
+		
+        $data = array(
+            "menu" => Data::$menu
+        );
+		$this->load->view('demo/index', $data);
+	}
 }

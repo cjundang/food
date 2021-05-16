@@ -7,17 +7,9 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.82.0">
     <title>Product example · Bootstrap v5.0</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/product/">
-
-    
-
     <!-- Bootstrap core CSS -->
 <link href="<?php echo base_url(); ?>assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    
-
-    
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
 
@@ -25,7 +17,6 @@
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
   </head>
   <body>
-    
 <header class="site-header sticky-top py-1">
   <nav class="container d-flex flex-column flex-md-row justify-content-between">
       <a class="py-2" href="#" aria-label="Product">
