@@ -8,10 +8,13 @@ class Article extends CI_Controller {
         $data = array(
             "menu" => Data::$menu
         );
-		$this->load->view('ui/article',$data);
+		$this->load->view('article/index',$data);
 	}
 
     public function details(){
-        print Demo::$data;
+        $data = array(
+            "menu" => Data::$menu
+        );
+		$this->load->view('article/index',$data);
     }
 }

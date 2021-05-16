@@ -8,6 +8,6 @@ class Tools extends CI_Controller {
         $data = array(
             "menu" => Data::$menu
         );
-		$this->load->view('ui/tools', $data);
+		$this->load->view('tools/index', $data);
 	}
 }

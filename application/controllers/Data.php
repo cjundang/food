@@ -28,6 +28,10 @@ class Data  {
             "title" => "ติดต่อเรา", "icon"=>"person-lines-fill",
             "link"=>"contact"
         )
-        );
+    );
+
+    public static $decoration = array(
+
+    );
     
 }

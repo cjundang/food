@@ -8,6 +8,6 @@ class Contact extends CI_Controller {
         $data = array(
             "menu" => Data::$menu
         );
-		$this->load->view('ui/contact', $data);
+		$this->load->view('contact/index', $data);
 	}
 }

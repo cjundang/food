@@ -8,6 +8,6 @@ class Shop extends CI_Controller {
         $data = array(
             "menu" => Data::$menu
         );
-		$this->load->view('ui/shop', $data);
+		$this->load->view('shop/index', $data);
 	}
 }

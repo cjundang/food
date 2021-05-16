@@ -8,6 +8,6 @@ class Map extends CI_Controller {
         $data = array(
             "menu" => Data::$menu
         );
-		$this->load->view('ui/map', $data);
+		$this->load->view('map/index', $data);
 	}
 }
