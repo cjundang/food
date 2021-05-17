@@ -48,14 +48,14 @@
   </nav>
 </header>
 <main>
-  <!--
+<!--  
   <div class="">
     <img src="<?php echo base_url()?>assets/header/article.png" width="100%" height="100%">
   </div>
   <div class="">
     <img src="<?php echo base_url()?>assets/header/recommended.jpg" width="100%" height="100%">
   </div>
-        -->
+        -->  
   <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -101,7 +101,7 @@
                   line += "<div class='row' style='margin-top:10px ; background:#dddddd'>";
                   line += "<div class='col-md-6' style='margin-top:10px'>";
                   line += "<div style='vali'>";
-                  line += "<a href='<?php echo site_url('article/details/" +v.link+"');?>'>";
+                  line += "<a href='<?php echo base_url()?>"+ v.link +"'>";
                   line += "<img src='"+ v.caption +"' width='100%' />";
                   line += "</a> </div>";
                   line += "</div>";
@@ -122,7 +122,7 @@
                   line += "<p class='card-text' > "+ v.content +" </p></div></div>";
                   line += "<div class='col-md-6'>";
                   line += "<div style='vali'>";
-                  line += "<a href='<?php echo site_url('" +v.link+"');?>'>";
+                  line += "<a href='<?php echo base_url()?>"+ v.link +"'>";
                   line += "<img src='"+ v.caption +"' width='100%' />";
                   line += "</a> </div>";
                   line += "</div>";

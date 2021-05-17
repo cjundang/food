@@ -48,19 +48,21 @@
   </nav>
 </header>
 <main>
-  <!--
+ <!-- 
   <div class="">
-    <img src="<?php echo base_url()?>assets/header/article.png" width="100%" height="100%">
+    <img src="<?php echo base_url()?>assets/header/food.png" width="100%" >
   </div>
+          -->
   <div class="">
-    <img src="<?php echo base_url()?>assets/header/recommended.jpg" width="100%" height="100%">
+    <img src="<?php echo base_url()?>assets/header/bestfood.png" width="100%" height="100%">
   </div>
-        -->
+
   <div class="container">
     <div class="row">
         <div class="col-md-8">
             <div class="row" id="lineRecommended"> </div>
         </div>
+
         <div class="col-md-4 bg-light">
           <form class="w-100 me-3" >
             <input type="search" style="margin-top: 10px;margin-bottom: 10px" class="form-control" placeholder="Search...">
@@ -78,13 +80,13 @@
     
     <script>
       $(()=>{
-        loadTopArticle();
+        loadTopFood();
         loadTopFourCafe();
      
        });
 
-      function loadTopArticle(){
-        var url = "http://localhost/index.php/Articleapi/getall";
+      function loadTopFood(){
+        var url = "http://localhost/index.php/foodapi/getall";
         $.ajax({
           type: "GET",
           url: url,
@@ -95,41 +97,26 @@
             $("#lineRecommended").empty();
             $.each(items, (k, v)=>{
                 console.log(k);
-                if(k % 2 == 0){
                   var d = new Date(v.update);
-                  dline = d.getDate() + " " + month[d.getMonth()] + " " + (543+d.getFullYear());
-                  line += "<div class='row' style='margin-top:10px ; background:#dddddd'>";
-                  line += "<div class='col-md-6' style='margin-top:10px'>";
-                  line += "<div style='vali'>";
-                  line += "<a href='<?php echo site_url('article/details/" +v.link+"');?>'>";
-                  line += "<img src='"+ v.caption +"' width='100%' />";
-                  line += "</a> </div>";
-                  line += "</div>";
-                  line += "<div class='col-md-6' style='margin-top:10px'>";
-                  line += "<div >";
-                  line += "<h4 class='card-title'> "+ v.title +" </h4>";
-                  line += "<span style='font-size:small;color:gray'>โพสวันที่ "+ dline +"</span></br>";
-                  line += "<p class='card-text' > "+ v.content +" </p>";
-                  line += "</div></div></div>";
-                }else{
-                  var d = new Date(v.update);
-                  dline = d.getDate() + " " + month[d.getMonth()] + " " + (543+d.getFullYear());
-                  line += "<div class='row' style='margin-top:10px'>";
-                  line += "<div class='col-md-6'>";
-                  line += "<div>";
-                  line += "<h4 class='card-title'> "+ v.title +" </h4>";
-                  line += "<span style='font-size:small;color:gray'>โพสวันที่ "+ dline +"</span></br>";
-                  line += "<p class='card-text' > "+ v.content +" </p></div></div>";
-                  line += "<div class='col-md-6'>";
-                  line += "<div style='vali'>";
-                  line += "<a href='<?php echo site_url('" +v.link+"');?>'>";
-                  line += "<img src='"+ v.caption +"' width='100%' />";
-                  line += "</a> </div>";
-                  line += "</div>";
-
-                  line += "</div>";
-                }
-
+                  dline = d.getDate() + "/" + (1+d.getMonth()) + "/" + (543+d.getFullYear());
+                  line +="<div class='col-md-4' style='margin-top:10px'>";
+                  line +="  <div style='border:2px solid #dddddd;border-radius: 10px;'>";
+                  line +="      <div class='row'>";
+                  line +="          <a href=\"<?php echo site_url('food/details/"+v.link+"');?>\"><img src='"+ v.caption +"' width='100%'></a>";
+                  line +="      </div>";
+                  line +="      <div class='row' style='padding:5px'>";
+                  line +="          <div class='col-md-8'>";
+                  line +="             <h5>"+ v.title +"</h5>";
+                  line +="              <span style='font-size:x-small; text-color:#dddddd'><i class='bi bi-clock'></i> อัพเดทเมื่อ "+dline+"</span>";
+                  line +="          </div>";
+                  line +="          <div class='col-md-4' style='text-align:center;'>";
+                  line +="              <span style='font-size:x-small;'>อ่าน "+ v.read +" ครั้ง </span><br/>";
+                  line +="              <span style='font-size:x-small;'>ถูกใจ "+ v.like+" ครั้ง</span>";
+                  line +="          </div>";
+                  line +="      </div>";
+                  line +="  </div>";
+                  line +="</div>";
+                  
             });
             $("#lineRecommended").append(line);
           }

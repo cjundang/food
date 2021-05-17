@@ -12,6 +12,10 @@ class Data  {
             "link"=>"article"
         ),
         array(
+            "title" => "อาหาร", "icon"=>"journal-bookmark",
+            "link"=>"food"
+        ),
+        array(
             "title" => "ร้านอาหาร", "icon"=>"shop",
             "link"=>"shop"
         ),
