@@ -52,23 +52,30 @@
   <div class="">
     <img src="<?php echo base_url()?>assets/header/article.png" width="100%" height="100%">
   </div>
+          -->
   <div class="">
     <img src="<?php echo base_url()?>assets/header/recommended.jpg" width="100%" height="100%">
   </div>
-        -->
+
   <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row" id="lineRecommended"> </div>
         </div>
-        <div class="col-md-4 bg-light">
+        <div class="col-md-3 bg-light">
           <form class="w-100 me-3" >
             <input type="search" style="margin-top: 10px;margin-bottom: 10px" class="form-control" placeholder="Search...">
           </form>
-          
           <div class="row" id="topFourCafe"></div>
         </div>
   </div>
+  <div class="container">
+    <div class="">
+      <img src="<?php echo base_url()?>assets/header/newreview.jpg" width="100%" height="100%" />
+    </div>
+    <div class="row" id="LastReivew"></div>
+  </div>
+
 
 </main>
 

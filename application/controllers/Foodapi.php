@@ -141,10 +141,16 @@ class Foodapi extends CI_Controller {
                     ),
                 ),
                 "tools" => array(
-                    "cover" => "",
-                    "name" => "",
-                    "content" => "",
-                    "model3d" => ""
+                    array(
+                        "name" => "จาน",
+                        "content" => "",
+                        "model3d" => "Dish"
+                    ),
+                    array(
+                        "name" => "กาน้ำ",
+                        "content" => "",
+                        "model3d" => "Kanam"
+                    ),                    
                 )
             ),
         );

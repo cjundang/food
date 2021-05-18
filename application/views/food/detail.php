@@ -61,9 +61,9 @@
     <img src="<?php echo base_url()?>assets/header/bestfood.png" width="100%" height="100%">
   </div>
         -->
-  <div class="container">
+<div class="container">
     <div class="row" style="margin-top:20px;">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row" style="margin-top:20px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
                 <div class="col-md-12">
                     <input type="hidden" id="fid" value="<?php echo $id;?>" />
@@ -89,43 +89,43 @@
 
             <div class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
                 <div class="col-md-12">
-                    <h5>สรรพคุณทางยา</h5>
+                    <h5>สรรพคุณ</h5>
                     <p id="medical"></p>    
                 </div>
             </div>
-
-            <div class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
-                <h5>เครื่องครัว</h5>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-4" style="text-align:center">
-                            <img src="http://localhost/Dish/cover.png" alt=""><br/>
-                            <span><b>จาน</b></span>
-                        </div>
-                    </div>          
-                </div>
-                <div class="col-md-6">
-                    <x3d width='400px' height='300px' style="background-color:#dddddd">
-                    <scene>
-                    <!-- viewpoint position="-1.94639 1.79771 -2.89271" orientation="0.03886 0.99185 0.12133 3.75685"></!-->
-                    <viewpoint position="0 0 15" orientation="0.0 0.0 0.0 0.0"></viewpoint>
-                    <Inline nameSpaceName="Dish" mapDEFToID="true" onclick='redNose();' url="http://localhost/model/Dish/Dish.x3d" />
-                    </scene>
-                    </x3d>    
-                </div>
-
-            </div>
-
+            
+            
         </div>
-
-        <div class="col-md-4 bg-light">
+        <div class="col-md-3 bg-light">
           <form class="w-100 me-3" >
             <input type="search" style="margin-top: 10px;margin-bottom: 10px" class="form-control" placeholder="Search...">
           </form>
           
           <div class="row" id="topFourCafe"></div>
+    </div>
+    <div class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
+        <h5>เครื่องครัว</h5>
+        <div class="col-md-8">
+            <div class="row" id="tools_list">
+                
+            
+                
+            </div>          
         </div>
-  </div>
+        <div class="col-md-4" id="cavas">
+             <x3d width='100%' height='300px' style="background-color:#ffffff">
+                <scene>
+                <viewpoint id="model_link2" position="0 0 20" orientation="0.0 0.0 0.0 0.0"></viewpoint>
+                <Inline id="model_link" nameSpaceName="Dish" mapDEFToID="true" onclick='redNose();' url="http://localhost/model/Dish/model.x3d" />
+                </scene>
+            </x3d>    
+  
+        </div>
+    </div>
+    
+</div>
+    
+ 
 
 </main>
  
@@ -136,10 +136,20 @@
     
     <script>
       $(()=>{
+        //$("#cavas").hide();
         loadTopFood();
         loadFood();
-     
+        
        });
+
+       function render_click(){
+        
+            $("#model_link2").attr('position', "0 0 20");
+            $("#model_link2").attr('orientation', "0.0 0.0 0.0 0.0");
+            $("#model_link").attr('nameSpaceName', this.id);
+            $("#model_link").attr('url', 'http://localhost/model/'+this.id+'/model.x3d');
+
+       }
 
        function redNose(){
         if(document.getElementById('Deer__MA_Nose').getAttribute('diffuseColor')!= '1 0 0')
@@ -193,7 +203,7 @@
           url: url,
           success: function(data){
             var items = JSON.parse(data)[0];
-            console.log(items);
+            
             $("#heading").text(items.heading);
             $("#content").text(items.content);
             var line = "";
@@ -213,7 +223,18 @@
             $("#caption").attr('src', items.caption);
             $("#medical").html(medical);
 
-
+            console.log(items.tools);
+            var line = ""
+            $.each(items.tools, (k,v)=>{
+                line += '<div class="col-md-3" style="text-align:center">';
+                path = "<?php echo base_url();?>"+'model/'+v.model3d+'/cover.png';
+                line += '<img style="width:100%" src="'+ path +'" alt="" class="render" id="'+ v.model3d +'"><br/>';
+                line += '<span><b>'+ v.name +'</b></span>';
+                line += '</div>';
+                
+            });
+            $("#tools_list").append(line);
+            $(".render").click(render_click);
             
           }
         });

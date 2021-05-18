@@ -59,18 +59,26 @@
 
   <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row" id="lineRecommended"> </div>
         </div>
 
-        <div class="col-md-4 bg-light">
+        <div class="col-md-3 bg-light">
           <form class="w-100 me-3" >
             <input type="search" style="margin-top: 10px;margin-bottom: 10px" class="form-control" placeholder="Search...">
           </form>
-          
           <div class="row" id="topFourCafe"></div>
         </div>
+    </div>
   </div>
+          <!-- ดูรีวิวล่าสุด -->
+  <div class="container">
+    <div class="">
+      <img src="<?php echo base_url()?>assets/header/newreview.jpg" width="100%" height="100%" />
+    </div>
+    <div class="row" id="LastReivew"></div>
+  </div>
+
 
 </main>
 
@@ -96,9 +104,10 @@
             var line = "";
             $("#lineRecommended").empty();
             $.each(items, (k, v)=>{
-                console.log(k);
+
                   var d = new Date(v.update);
                   dline = d.getDate() + "/" + (1+d.getMonth()) + "/" + (543+d.getFullYear());
+                  console.log(dline);
                   line +="<div class='col-md-4' style='margin-top:10px'>";
                   line +="  <div style='border:2px solid #dddddd;border-radius: 10px;'>";
                   line +="      <div class='row'>";
