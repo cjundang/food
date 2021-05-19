@@ -19,10 +19,10 @@ class Data  {
             "title" => "ร้านอาหาร", "icon"=>"shop",
             "link"=>"shop"
         ),
-        array(
-            "title" => "แผนที่", "icon"=>"map",
-            "link"=>"map"
-        ),
+//        array(
+//            "title" => "แผนที่", "icon"=>"map",
+//            "link"=>"map"
+        //),
         array(
             "title" => "เครื่องครัว", "icon"=>"shop",
             "link"=>"tools"

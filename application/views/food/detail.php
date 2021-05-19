@@ -68,7 +68,7 @@
                 <div class="col-md-12">
                     <input type="hidden" id="fid" value="<?php echo $id;?>" />
                     <h5 id="heading"></h5>
-                    <p id="content"></p>
+                    
                 </div>
             </div>
             
@@ -77,13 +77,25 @@
                 <h5>ส่วนผสม</h5>
                 <table class="table">
                     <tbody id="ingredient">
-                        
                     </tbody>
-                    
                 </table>
                 </div>
                 <div class="col-md-6">
+                  <p id="content"></p>
+                </div>
+                
+            </div>
+            <div id='render' class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
+                <div class="col-md-6">
                     <img id="caption" style="width:100%" src="" />
+                </div>
+                <div class="col-md-6 bg-light" id="cavas">
+                  <x3d width='95%' height='300px' style="margin:10px;">
+                    <scene>
+                    <viewpoint id="model_link2" position="0 0 20" orientation="0.0 0.0 0.0 0.0"></viewpoint>
+                    <Inline id="model_link" nameSpaceName="" mapDEFToID="true" onclick='redNose();' url="" />
+                    </scene>
+                  </x3d>    
                 </div>
             </div>
 
@@ -106,27 +118,7 @@
           
           </div>
     </div>
-    <!--
-    <div class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
-        <h5>เครื่องครัว</h5>
-        <div class="col-md-8">
-            <div class="row" id="tools_list">
-                
-            
-                
-            </div>          
-        </div>
-        <div class="col-md-4" id="cavas">
-             <x3d width='100%' height='300px' style="background-color:#ffffff">
-                <scene>
-                <viewpoint id="model_link2" position="0 0 20" orientation="0.0 0.0 0.0 0.0"></viewpoint>
-                <Inline id="model_link" nameSpaceName="Dish" mapDEFToID="true" onclick='redNose();' url="http://localhost/model/Dish/model.x3d" />
-                </scene>
-            </x3d>    
-  
-        </div>
-    </div>
-    -->
+
 </div>
     
  
@@ -141,64 +133,20 @@
     <script>
       $(()=>{
         //$("#cavas").hide();
-        loadTopFood();
         loadFood();
-        loadShopByMenu(<?php echo $id;?>);
+        loadShopByMenu('<?php echo $id;?>');
         
-       });
-
-       function render_click(){
-        
-            $("#model_link2").attr('position', "0 0 20");
-            $("#model_link2").attr('orientation', "0.0 0.0 0.0 0.0");
-            $("#model_link").attr('nameSpaceName', this.id);
-            $("#model_link").attr('url', 'http://localhost/model/'+this.id+'/model.x3d');
-
-       }
-
-       function redNose(){
+      });
+       
+       
+      function redNose()
+      {
         if(document.getElementById('Deer__MA_Nose').getAttribute('diffuseColor')!= '1 0 0')
-            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '1 0 0');
+            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '1 1 0');
         else
-            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '0 0 0');
-        }
-
-      function loadTopFood(){
-        var url = "http://localhost/index.php/foodapi/getall";
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function(data){
-            var month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            var items = JSON.parse(data);
-            var line = "";
-            $("#lineRecommended").empty();
-            $.each(items, (k, v)=>{
-                  var d = new Date(v.update);
-                  dline = d.getDate() + "/" + (1+d.getMonth()) + "/" + (543+d.getFullYear());
-                  line +="<div class='col-md-4' style='margin-top:10px'>";
-                  line +="  <div style='border:2px solid #dddddd;border-radius: 10px;'>";
-                  line +="      <div class='row'>";
-                  line +="          <a href=\"<?php echo site_url('food/details/"+v.link+"');?>\"><img src='"+ v.caption +"' width='100%'></a>";
-                  line +="      </div>";
-                  line +="      <div class='row' style='padding:5px'>";
-                  line +="          <div class='col-md-8'>";
-                  line +="             <h5>"+ v.title +"</h5>";
-                  line +="              <span style='font-size:x-small; text-color:#dddddd'><i class='bi bi-clock'></i> อัพเดทเมื่อ "+dline+"</span>";
-                  line +="          </div>";
-                  line +="          <div class='col-md-4' style='text-align:center;'>";
-                  line +="              <span style='font-size:x-small;'>อ่าน "+ v.read +" ครั้ง </span><br/>";
-                  line +="              <span style='font-size:x-small;'>ถูกใจ "+ v.like+" ครั้ง</span>";
-                  line +="          </div>";
-                  line +="      </div>";
-                  line +="  </div>";
-                  line +="</div>";
-                  
-            });
-            $("#lineRecommended").append(line);
-          }
-        });
+            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '0 1 0');
       }
+
 
       function loadFood(){
         var id = $("#fid").val()
@@ -208,8 +156,8 @@
           url: url,
           success: function(data){
             var items = JSON.parse(data)[0];
-            
-            $("#heading").text(items.heading);
+            console.log(items);
+            $("#heading").text(items.title);
             $("#content").text(items.content);
             var line = "";
             ind = items.ingredient;
@@ -228,18 +176,11 @@
             $("#caption").attr('src', items.caption);
             $("#medical").html(medical);
 
-/*            var line = ""
-            $.each(items.tools, (k,v)=>{
-                line += '<div class="col-md-3" style="text-align:center">';
-                path = "<?php echo base_url();?>"+'model/'+v.model3d+'/cover.png';
-                line += '<img style="width:100%" src="'+ path +'" alt="" class="render" id="'+ v.model3d +'"><br/>';
-                line += '<span><b>'+ v.name +'</b></span>';
-                line += '</div>';
-                
-            });
-            $("#tools_list").append(line);
-            $(".render").click(render_click);
-*/            
+            $("#model_link2").attr('position', items.models.position );
+            $("#model_link2").attr('orientation', "0.0 0.0 0.0 0.0");
+            $("#model_link").attr('nameSpaceName', $("#fid").val());
+            $("#model_link").attr('url', 'http://localhost/assets/model_food/'+ items.models.name +'/model.x3d');
+
           }
         });
       }

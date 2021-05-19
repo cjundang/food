@@ -47,7 +47,9 @@
   </nav>
 </header>
 <main>
-    
+    <div class="">
+      <img src="<?php echo base_url()?>assets/header/shop.png" width="100%" height="100%">
+    </div>
     <div class="">
       <img src="<?php echo base_url()?>assets/header/bestres.png" width="100%" height="100%">
     </div>

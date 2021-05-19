@@ -111,7 +111,7 @@
                   line +="<div class='col-md-4' style='margin-top:10px'>";
                   line +="  <div style='border:2px solid #dddddd;border-radius: 10px;'>";
                   line +="      <div class='row'>";
-                  line +="          <a href=\"<?php echo site_url('food/details/"+v.link+"');?>\"><img src='"+ v.caption +"' width='100%'></a>";
+                  line +="          <a href=\"<?php echo site_url('food/details/"+v.models.name+"');?>\"><img src='"+ v.caption +"' width='100%'></a>";
                   line +="      </div>";
                   line +="      <div class='row' style='padding:5px'>";
                   line +="          <div class='col-md-8'>";
