@@ -96,5 +96,27 @@ class Shopapi extends CI_Controller {
             ->set_output(json_encode($data));
     }
     
+    public function getShopByMenu($shopid){
+        $data = array();
+        
+        array_push($data, array(
+            "caption"=> "http://localhost/assets/main_page/cafe/1.jpg",
+            "link"=> "#",
+        ));
+        array_push($data, array(
+            "caption"=> "http://localhost/assets/main_page/cafe/2.jpg",
+            "link"=> "#",
+        ));
+        array_push($data, array(
+            "caption"=> "http://localhost/assets/main_page/cafe/3.jpg",
+            "link"=> "#",
+        ));
+
+
+
+        return $this->output
+            ->set_status_header(200)
+            ->set_output(json_encode($data));
+    }
     
 }

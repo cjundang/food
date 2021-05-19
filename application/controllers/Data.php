@@ -7,10 +7,10 @@ class Data  {
             "title" => "หน้าหลัก", "icon"=>"house-door",
             "link"=>"home"
         ),
-        array(
-            "title" => "บทความ", "icon"=>"journal-bookmark",
-            "link"=>"article"
-        ),
+//        array(
+//            "title" => "บทความ", "icon"=>"journal-bookmark",
+//            "link"=>"article"
+//        ),
         array(
             "title" => "อาหาร", "icon"=>"journal-bookmark",
             "link"=>"food"

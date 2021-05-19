@@ -101,8 +101,12 @@
             <input type="search" style="margin-top: 10px;margin-bottom: 10px" class="form-control" placeholder="Search...">
           </form>
           
-          <div class="row" id="topFourCafe"></div>
+          <div class="row" id="topFourCafe">
+
+          
+          </div>
     </div>
+    <!--
     <div class="row" style="margin-top:10px;border: 2px solid orange;border-radius:10px; padding:10px; width:100%">
         <h5>เครื่องครัว</h5>
         <div class="col-md-8">
@@ -122,7 +126,7 @@
   
         </div>
     </div>
-    
+    -->
 </div>
     
  
@@ -139,6 +143,7 @@
         //$("#cavas").hide();
         loadTopFood();
         loadFood();
+        loadShopByMenu(<?php echo $id;?>);
         
        });
 
@@ -223,8 +228,7 @@
             $("#caption").attr('src', items.caption);
             $("#medical").html(medical);
 
-            console.log(items.tools);
-            var line = ""
+/*            var line = ""
             $.each(items.tools, (k,v)=>{
                 line += '<div class="col-md-3" style="text-align:center">';
                 path = "<?php echo base_url();?>"+'model/'+v.model3d+'/cover.png';
@@ -235,10 +239,30 @@
             });
             $("#tools_list").append(line);
             $(".render").click(render_click);
-            
+*/            
           }
         });
       }
+
+      function loadShopByMenu(id){
+        var url = "http://localhost/index.php/shopapi/getshopbymenu/"+id;
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function(data){
+            var items = JSON.parse(data);
+            var line = "";
+            $("#topFourCafe").empty();
+            $.each(items, (k, v)=>{
+              line += '<div class="col-md-12" style="margin:5px">';
+              line += '<a href="'+v.link+'">';
+              line += '<img src="'+ v.caption+'" style="width:100%"/></a></div>';
+            });
+            $("#topFourCafe").append(line);
+          }
+        });
+      }
+
 
     </script>
   </body>

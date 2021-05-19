@@ -71,14 +71,14 @@
         </div>
     </div>
   </div>
-          <!-- ดูรีวิวล่าสุด -->
+          <!-- ดูรีวิวล่าสุด
   <div class="container">
     <div class="">
       <img src="<?php echo base_url()?>assets/header/newreview.jpg" width="100%" height="100%" />
     </div>
     <div class="row" id="LastReivew"></div>
   </div>
-
+ -->
 
 </main>
 

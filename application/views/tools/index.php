@@ -23,6 +23,9 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  
+    <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> 
+    <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link> 
   </head>
   <body>
     
@@ -80,179 +83,87 @@
     <!-- img src="<?php echo base_url()?>assets/header/recommended.jpg" width="100%" height="100%" -->
   </div>
 
- 
-  <h1>Tools</h1>
-  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <img src="<?php echo base_url()?>assets/header/bestfood.png" width="100%" height="100%">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row" id="tools_list"></div>
+      </div>
+      <div class="col-md-4 bg-light" id="cavas">
+              <x3d width='95%' height='300px' style="background-color:#ffffff;margin:10px;">
+                <scene>
+                <viewpoint id="model_link2" position="0 0 20" orientation="0.0 0.0 0.0 0.0"></viewpoint>
+                <Inline id="model_link" nameSpaceName="" mapDEFToID="true" onclick='redNose();' url="" />
+                </scene>
+            </x3d>    
+            <h4> <span id='tools_header'></span></h4>
+            <span style='font-size:small' id='tools_content'></span>
+        </div>
+    </div>
+
+  </div>
+   
         
 </main>
-
-<br/>
-<!--
-  <footer class="  site-header">
-    <div class="container">
-  <div class="row">
-    <div class="col-12 col-md">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
-      <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Features</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Cool stuff</a></li>
-        <li><a class="link-secondary" href="#">Random feature</a></li>
-        
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Resource name</a></li>
-        <li><a class="link-secondary" href="#">Resource</a></li>
-        
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>Resources</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Business</a></li>
-        <li><a class="link-secondary" href="#">Education</a></li>
-      </ul>
-    </div>
-    <div class="col-6 col-md">
-      <h5>About</h5>
-      <ul class="list-unstyled text-small">
-        <li><a class="link-secondary" href="#">Team</a></li>
-        <li><a class="link-secondary" href="#">Locations</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-</footer>
-        -->
+ 
     <script src="<?php echo base_url(); ?>assets/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+    var items;
       $(()=>{
-        
-        
+          loadTools();
        });
+       function render_click(){
+         var id = this.id.split('_');
+          v = items[id[1]-1];
+          $("#tools_header").text(v.caption);
+          $("#tools_content").text(v.content);
+          $("#model_link2").attr('position', "0 0 20");
+          $("#model_link2").attr('orientation', "0.0 0.0 0.0 0.0");
+          $("#model_link").attr('nameSpaceName', id[0]);
+          $("#model_link").attr('url', 'http://localhost/model/'+id[0]+'/model.x3d');
+        }
 
-      function loadLastArticle(){
-        var url = "http://localhost/index.php/api/getLastArticle";
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function(data){
-            var month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            var items = JSON.parse(data);
-            var line = "";
-            $("#lineRecommended").empty();
-            $.each(items, (k, v)=>{
-              line += "<div class='col-md-6'>";
-              line += "<div class='card'>"; 
-              line += "<a href='"+ v.link +"'><img src='<?php echo base_url()?>assets/main_page/recommend/"+ v.caption+"' width='100%' height='180'></a>";
-              line += "<div class='card-body'>";          
-              line += "<h5 class='card-title'>"+ v.title +"</h5>";
-              var d = new Date(v.update);
-              dline = d.getDate() + " " + month[d.getMonth()] + " " + (543+d.getFullYear());
-              line += "<p class='card-text'>"+ v.content +"</p>";
-              line += "<p class='card-text'>ข้อมูล ณ วันที่ "+ dline +"</p>";
-              line += "</div></div></div>";
-            });
-            $("#lineRecommended").append(line);
-          }
-        });
-      }
+      function redNose(){
+        if(document.getElementById('Deer__MA_Nose').getAttribute('diffuseColor')!= '1 0 0')
+            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '1 0 0');
+        else
+            document.getElementById('Deer__MA_Nose').setAttribute('diffuseColor', '0 0 0');
+        }
+      
 
-      function loadTopFourCafe(){
-        var url = "http://localhost/index.php/api/getTopFourCafe";
+    function loadTools(){
+        var url = "http://localhost/index.php/tools/getall";
         $.ajax({
           type: "GET",
           url: url,
           success: function(data){
-            var items = JSON.parse(data);
+            items = JSON.parse(data);
             var line = "";
-            $("#topFourCafe").empty();
+            $("#tools_list").empty();
             $.each(items, (k, v)=>{
-              line += "<div class='card'>";
-              line += "<a href='"+ v.link +"'>";
-              line += "<img src='<?php echo base_url()?>assets/main_page/cafe/"+ v.caption +"' width='100%' height='200'>";
-              line += "</a></div>";
+              line +='<div class="col-md-2" style="border: 2px solid #dddddd; border-radius: 10px; margin:2px;">';
+              line +='<div class="row">';
+              line +='<img class="render" id="'+v.tools+'_'+ v.id +'" src="http://localhost/model/'+v.tools+'/cover.png" />';
+              line +='</div>';
+              line +='<div class="row" style="text-align:center">';
+              line +='<h5>'+v.caption+'</h5>';
+              line +='</div></div>';
             });
-            $("#topFourCafe").append(line);
-          }
-        });
-      }
-      function loadTopEightRecommend(){
-        var url = "http://localhost/index.php/api/getTopEightRecommend";
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function(data){
-            var items = JSON.parse(data);
-            var line = "";
-            $("#TopEightRecommend").empty();
-            $.each(items, (k, v)=>{
-              line += "<div class='col-md-3'>";
-              line +=  "<div class='card'>";
-              line += "<a href='"+ v.link +"'>";
-              line += "<img src='<?php echo base_url()?>assets/main_page/top8/"+ v.caption +"' width='100%' height='180'>";
-              line += "</a></div></div>";
-            });
-            $("#TopEightRecommend").append(line);
+            $("#tools_list").append(line);
+            $(".render").click(render_click);
           }
         });
       }
 
-      function loadLastSixCafe(){
-        var url = "http://localhost/index.php/api/getLastSixCafe";
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function(data){
-            var month = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-            var items = JSON.parse(data);
-            var line = "";
-            $("#LastSixCafe").empty();
-            $.each(items, (k, v)=>{
-              line += "<div class='col-md-6'>";
-              line += "<div class='card'>"; 
-              line += "<a href='"+ v.link +"'><img src='<?php echo base_url()?>assets/main_page/cafe/"+ v.caption+"' width='100%' height='180'></a>";
-              line += "<div class='card-body'>";          
-              line += "<h5 class='card-title'>"+ v.title +"</h5>";
-              var d = new Date(v.update);
-              dline = d.getDate() + " " + month[d.getMonth()] + " " + (543+d.getFullYear());
-              line += "<p class='card-text'>"+ v.content +"</p>";
-              line += "<p class='card-text'>ข้อมูล ณ วันที่ "+ dline +"</p>";
-              line += "</div></div></div>";
-            });
-            $("#LastSixCafe").append(line);
-          }
-        });
-      }
 
-      function loadLastReivew(){
-        var url = "http://localhost/index.php/api/getLastReivew";
-        $.ajax({
-          type: "GET",
-          url: url,
-          success: function(data){
-            var items = JSON.parse(data);
-            var line = "";
-            $("#LastReivew").empty();
-            $.each(items, (k, v)=>{
-              line += "<div class='col-md-3'>";
-              line +=  "<div class='card'>";
-              line += "<a href='"+ v.link +"'>";
-              line += "<img src='<?php echo base_url()?>assets/main_page/last_reviews/"+ v.caption +"' width='100%' height='180'>";
-              line += "</a></div></div>";
-            });
-            $("#LastReivew").append(line);
-          }
-        });
-      }
- 
- 
+
+       
+
 
     </script>
   </body>
